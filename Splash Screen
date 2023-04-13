@@ -1,0 +1,130 @@
+var currentScene = 0;
+
+var connor = function (x,y,h){
+    //Hair
+noStroke();
+fill(158, 105, 19);
+quad(x+(h/100*141),y+(h/100*84),x+(h/100*146),y+(h/100*145),x+(h/100*48),y+(h/100*140),x+(h/100*59),y+(h/100*82));
+
+//Hood
+stroke(0, 0, 0);
+fill(49, 58, 189);
+ellipse(x+(h/100*98),y+(h/100*142),h/100*88,h/100*22);
+
+//Head
+noStroke();
+fill (252, 216, 148);
+ellipse (x+(h/100*100),y+(h/100*100),h/100*82,h/100*100);      
+
+//Hat
+fill (255, 0, 0);
+arc(x+(h/100*100),y+(h/100*89),h/100*87,h/100*103,184,364);      
+
+//Eyes
+stroke(0, 0, 0);
+fill(255, 255, 255);
+ellipse(x+(h/100*88),y+(h/100*101),h/100*13,h/100*15);
+ellipse(x+(h/100*113),y+(h/100*101),h/100*13,h/100*15);
+
+//Pupils
+fill(31, 124, 217);
+ellipse(x+(h/100*88),y+(h/100*101),h/100*5,h/100*5);
+ellipse(x+(h/100*112),y+(h/100*101),h/100*5,h/100*5);
+
+//Nose
+stroke(0, 0, 0);
+fill(252,216,148);
+bezier(x+(h/100*101),y+(h/100*103),x+(h/100*116),y+(h/100*121),x+(h/100*93),y+(h/100*121),x+(h/100*96),y+(h/100*115));
+
+//Sweatshirt
+noStroke();
+fill(49, 58, 189);
+quad(x+(h/100*148),y+(h/100*149),x+(h/100*46),y+(h/100*148),x+(h/100*48),y+(h/100*221),x+(h/100*151),y+(h/100*221));
+
+// Letter C
+stroke(255, 255, 255);
+fill(255, 255, 255);
+rect(x+(h/100*58),y+(h/100*153),h/100*6,h/100*59);
+rect(x+(h/100*65),y+(h/100*153),h/100*23,h/100*6);
+rect(x+(h/100*65),y+(h/100*206),h/100*23,h/100*6);
+
+// Letter L
+stroke(255, 255, 255);
+fill(255, 255, 255);
+rect(x+(h/100*109),y+(h/100*153),h/100*6,h/100*59);
+rect(x+(h/100*109),y+(h/100*207),h/100*30,h/100*6);
+
+//Mouth
+fill(0, 0, 0);
+arc(x+(h/100*99),y+(h/100*128),h/100*26,h/100*26,0,180);
+};
+
+
+//button
+var Button = function(config) {
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 150;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fill(0, 234, 255);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(19);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x+10, this.y+this.height/4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+           mouseX < (this.x + this.width) &&
+           mouseY > this.y &&
+           mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+
+var startButton = new Button({
+    x: 119,
+    y: 300,
+    label: "Start Game!",
+    onClick: function() {
+        currentScene = 1;
+    }
+});
+
+mouseClicked = function() {
+    if (currentScene === 0)
+    {
+        startButton.handleMouseClick();
+    }
+};
+
+//intro
+var splashScreen = function()
+{
+    background(106, 138, 196);
+    connor(307,-15,45);
+    textSize(30);
+    text("Connect 4", 3,22);
+    textSize(15);
+    text("By: Jayden Medeiros and Connor Leuteritz",3,54);
+    text("Instructions: Click 4 tiles at a time to find the set of 4",3,150);
+    text("matching figures. Race the clock, and do it with the least",3,165);
+    text("amount of tries!",3,180);
+    text("Press the start button when you are ready!", 50, 269);
+    startButton.draw();
+};
+
+//call to draw
+var draw = function() {
+    if (currentScene === 0){splashScreen();}
+};

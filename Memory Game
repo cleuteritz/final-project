@@ -114,8 +114,6 @@ mouseClicked = function() {
     }
 };
 
-var s = second();
-
 draw = function() {
     background(255, 255, 255);
     if (delayStartFC && (frameCount - delayStartFC) > 30) {
@@ -137,7 +135,7 @@ draw = function() {
         fill(0, 0, 0);
         textSize(15);
         text("Attempts: " + numTries, 292, 25);
-        text("Timer: " + s + " seconds", 18,25);
+        text("Timer: " + round(millis()/1000) + " seconds", 18,25);
     
 };
 

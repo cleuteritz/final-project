@@ -112,15 +112,13 @@ mouseClicked = function() {
 var splashScreen = function()
 {
     background(106, 138, 196);
-    connor(307,-15,45);
+    connor(78,-1,45);
     textSize(30);
-    text("Connect 4", 3,22);
-    textSize(15);
-    text("By: Jayden Medeiros and Connor Leuteritz",3,54);
-    text("Instructions: Click 4 tiles at a time to find the set of 4",3,150);
-    text("matching figures. Race the clock, and do it with the least",3,165);
-    text("amount of tries!",3,180);
-    text("Press the start button when you are ready!", 50, 269);
+    text("Connect 4", 122,147);
+    fill(255, 0, 0);
+    ellipse(139,255,50,50);
+    fill(0, 13, 255);
+    ellipse(238,255,50,50);
     startButton.draw();
 };
 

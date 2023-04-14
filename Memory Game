@@ -71,17 +71,42 @@ var Tile = function(x, y, face) {
     this.isMatch = false;
 };
 
+Tile.prototype.leaf_img = getImage("avatars/leaf-red");
+
 Tile.prototype.draw = function() {
-    fill(245, 204, 223);
+    stroke(0, 0, 0);
+    rectMode(CORNER);
+    if (this.isFaceUp){
+        if (0 && this.isMoused() ){
+            fill(250, 90, 90);
+        } else {
+            fill(245, 155, 155);
+        }
+    //fill(245, 204, 223);
+        strokeWeight(2);
+        rect(this.x, this.y, this.size, this.size, 10);
+        image(this.face, this.x, this.y, this.size, this.size);
+    } else {
+        if (1 && this.isMoused() ){
+            fill(250, 90, 90);
+        }else{
+            fill(247, 155, 155);
+        }
     strokeWeight(2);
-    rect(this.x, this.y, this.size, this.size, 10);
-    if (this.isFaceUp) {
+        rect(this.x, this.y, this.size, this.size, 10);
+        image(this.leaf_img, this.x, this.y,
+            this.size, this.size);
+    /*if (this.isFaceUp) {
         image(this.face, this.x, this.y, this.size, this.size);
     } else {
         image(getImage("avatars/leaf-red"), this.x, this.y, this.size, this.size);
-    }
+    }*/
+}
 };
 
+Tile.prototype.isMoused = function() {
+    return this.isUnderMouse(mouseX, mouseY); };
+    
 Tile.prototype.isUnderMouse = function(x, y) {
     return x >= this.x && x <= this.x + this.size  &&
         y >= this.y && y <= this.y + this.size;
@@ -230,7 +255,7 @@ mouseClicked = function() {
 var splashScreen = function()
 {
     background(106, 138, 196);
-    connor(307,-15,45);
+    connor(48,61,35);
     textSize(30);
     text("Memory Game", 3,22);
     textSize(15);
@@ -253,7 +278,6 @@ var playGame= function(){
         }
         flippedTiles = [];
         delayStartFC = null;
-        //noLoop();
     }
     
     for (var i = 0; i < tiles.length; i++) {
@@ -267,7 +291,6 @@ var playGame= function(){
     
 
 
-//noLoop();
 
 };
 

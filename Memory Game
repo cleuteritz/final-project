@@ -2,6 +2,79 @@ var currentScene = 0;
 var stillPlaying = false;
 var startTime;
 
+var drawBitmojiHead=function(bitmojiX,bitmojiY,height){
+fill(235, 215, 202);
+noStroke();
+rect(bitmojiX+(height/150*182),bitmojiY+(height/150*235),(height/150*35),(height/150*85));
+ellipse(bitmojiX+(height/150*200),bitmojiY+(height/150*236),(height/150*123),(height/150*108));
+ellipse(bitmojiX+(height/150*200),bitmojiY+(height/150*185),(height/150*148),(height/150*156));
+ellipse(bitmojiX+(height/150*271),bitmojiY+(height/150*215),(height/150*10),(height/150*20));
+ellipse(bitmojiX+(height/150*130),bitmojiY+(height/150*215),(height/150*10),(height/150*20));
+//Head
+
+fill(167, 198, 214);
+stroke(255, 255, 255);
+strokeWeight(3);
+ellipse(bitmojiX+(height/150*168),bitmojiY+(height/150*200),(height/150*20),(height/150*20));
+ellipse(bitmojiX+(height/150*228),bitmojiY+(height/150*200),(height/150*20),(height/150*20));
+fill(61, 54, 50);
+stroke(87, 70, 56);
+line(bitmojiX+(height/150*145),bitmojiY+(height/150*195),bitmojiX+(height/150*175),bitmojiY+(height/150*186));
+line(bitmojiX+(height/150*221),bitmojiY+(height/150*186),bitmojiX+(height/150*254),bitmojiY+(height/150*195));
+//Eyes and Brows
+
+noStroke();
+fill(191, 103, 103);
+arc(bitmojiX+(height/150*200),bitmojiY+(height/150*257),(height/150*42),(height/150*27),(height/150*3),193);
+stroke(255, 255, 255);
+line(bitmojiX+(height/150*180),bitmojiY+(height/150*255),bitmojiX+(height/150*219),bitmojiY+(height/150*255));
+noStroke();
+//Mouth
+
+fill(212, 191, 178);
+triangle(bitmojiX+(height/150*185),bitmojiY+(height/150*236),bitmojiX+(height/150*200),bitmojiY+(height/150*245),bitmojiX+(height/150*215),bitmojiY+(height/150*236));
+//Nose
+
+fill(48, 34, 22);
+ellipse(bitmojiX+(height/150*135),bitmojiY+(height/150*138),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*156),bitmojiY+(height/150*137),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*181),bitmojiY+(height/150*134),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*201),bitmojiY+(height/150*127),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*226),bitmojiY+(height/150*123),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*126),bitmojiY+(height/150*153),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*127),bitmojiY+(height/150*128),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*145),bitmojiY+(height/150*113),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*265),bitmojiY+(height/150*146),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*166),bitmojiY+(height/150*109),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*188),bitmojiY+(height/150*110),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*214),bitmojiY+(height/150*103),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*268),bitmojiY+(height/150*123),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*250),bitmojiY+(height/150*133),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*244),bitmojiY+(height/150*112),(height/150*35),(height/150*35));
+//Hair
+
+};
+
+var drawBitmojiBody=function(bitmojiX,bitmojiY,height){
+ fill(148, 148, 148);
+rect(bitmojiX+(height/150*110),bitmojiY+(height/150*300),(height/150*178),(height/150*50));
+arc(bitmojiX+(height/150*112),bitmojiY+(height/150*321),(height/150*65),(height/150*41),(height/150*91),270);
+arc(bitmojiX+(height/150*293),bitmojiY+(height/150*321),(height/150*65),(height/150*41),(height/150*-90),317);
+rect(bitmojiX+(height/150*80),bitmojiY+(height/150*325),(height/150*193),(height/150*46));
+rect(bitmojiX+(height/150*133),bitmojiY+(height/150*325),(height/150*193),(height/150*46));
+fill(255, 255, 255);
+textSize((height/150*50));
+text('JM',bitmojiX+(height/150*165),bitmojiY+(height/150*320),(height/150*100),(height/150*100));
+//Shirt   
+};
+
+var drawJayden=function(bitmojiX,bitmojiY,height)
+{
+    drawBitmojiHead(bitmojiX,bitmojiY,height);
+    drawBitmojiBody(bitmojiX,bitmojiY,height);
+};
+
+
 var connor = function (x,y,h){
     //Hair
 noStroke();
@@ -264,6 +337,7 @@ var splashScreen = function()
     text("matching figures. Race the clock, and do it with the least",3,165);
     text("amount of tries!",3,180);
     text("Press the start button when you are ready!", 50, 269);
+    drawJayden(103,50,35);
     startButton.draw();
 };
 

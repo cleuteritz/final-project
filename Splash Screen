@@ -26,6 +26,7 @@ arc(x+(h/100*100),y+(h/100*89),h/100*87,h/100*103,184,364);
 
 //Eyes
 stroke(0, 0, 0);
+strokeWeight(1);
 fill(255, 255, 255);
 ellipse(x+(h/100*88),y+(h/100*101),h/100*13,h/100*15);
 ellipse(x+(h/100*113),y+(h/100*101),h/100*13,h/100*15);
@@ -256,4 +257,3 @@ var draw = function() {
     else if(currentScene===3){instructScreen();}
 
 };
- 

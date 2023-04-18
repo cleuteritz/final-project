@@ -1,5 +1,9 @@
 var currentScene = 0;
 
+
+
+
+
 var connor = function (x,y,h){
     //Hair
 noStroke();
@@ -59,6 +63,78 @@ fill(0, 0, 0);
 arc(x+(h/100*99),y+(h/100*128),h/100*26,h/100*26,0,180);
 };
 
+var drawBitmojiHead=function(bitmojiX,bitmojiY,height){
+fill(235, 215, 202);
+noStroke();
+rect(bitmojiX+(height/150*182),bitmojiY+(height/150*235),(height/150*35),(height/150*85));
+ellipse(bitmojiX+(height/150*200),bitmojiY+(height/150*236),(height/150*123),(height/150*108));
+ellipse(bitmojiX+(height/150*200),bitmojiY+(height/150*185),(height/150*148),(height/150*156));
+ellipse(bitmojiX+(height/150*271),bitmojiY+(height/150*215),(height/150*10),(height/150*20));
+ellipse(bitmojiX+(height/150*130),bitmojiY+(height/150*215),(height/150*10),(height/150*20));
+//Head
+
+fill(167, 198, 214);
+stroke(255, 255, 255);
+strokeWeight(3);
+ellipse(bitmojiX+(height/150*168),bitmojiY+(height/150*200),(height/150*20),(height/150*20));
+ellipse(bitmojiX+(height/150*228),bitmojiY+(height/150*200),(height/150*20),(height/150*20));
+fill(61, 54, 50);
+stroke(87, 70, 56);
+line(bitmojiX+(height/150*145),bitmojiY+(height/150*195),bitmojiX+(height/150*175),bitmojiY+(height/150*186));
+line(bitmojiX+(height/150*221),bitmojiY+(height/150*186),bitmojiX+(height/150*254),bitmojiY+(height/150*195));
+//Eyes and Brows
+
+noStroke();
+fill(191, 103, 103);
+arc(bitmojiX+(height/150*200),bitmojiY+(height/150*257),(height/150*42),(height/150*27),(height/150*3),193);
+stroke(255, 255, 255);
+line(bitmojiX+(height/150*180),bitmojiY+(height/150*255),bitmojiX+(height/150*219),bitmojiY+(height/150*255));
+noStroke();
+//Mouth
+
+fill(212, 191, 178);
+triangle(bitmojiX+(height/150*185),bitmojiY+(height/150*236),bitmojiX+(height/150*200),bitmojiY+(height/150*245),bitmojiX+(height/150*215),bitmojiY+(height/150*236));
+//Nose
+
+fill(48, 34, 22);
+ellipse(bitmojiX+(height/150*135),bitmojiY+(height/150*138),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*156),bitmojiY+(height/150*137),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*181),bitmojiY+(height/150*134),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*201),bitmojiY+(height/150*127),(height/150*30),(height/150*30));
+ellipse(bitmojiX+(height/150*226),bitmojiY+(height/150*123),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*126),bitmojiY+(height/150*153),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*127),bitmojiY+(height/150*128),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*145),bitmojiY+(height/150*113),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*265),bitmojiY+(height/150*146),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*166),bitmojiY+(height/150*109),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*188),bitmojiY+(height/150*110),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*214),bitmojiY+(height/150*103),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*268),bitmojiY+(height/150*123),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*250),bitmojiY+(height/150*133),(height/150*35),(height/150*35));
+ellipse(bitmojiX+(height/150*244),bitmojiY+(height/150*112),(height/150*35),(height/150*35));
+//Hair
+
+};
+
+var drawBitmojiBody=function(bitmojiX,bitmojiY,height){
+ fill(148, 148, 148);
+rect(bitmojiX+(height/150*110),bitmojiY+(height/150*300),(height/150*178),(height/150*50));
+arc(bitmojiX+(height/150*112),bitmojiY+(height/150*321),(height/150*65),(height/150*41),(height/150*91),270);
+arc(bitmojiX+(height/150*293),bitmojiY+(height/150*321),(height/150*65),(height/150*41),(height/150*-90),317);
+rect(bitmojiX+(height/150*80),bitmojiY+(height/150*325),(height/150*193),(height/150*46));
+rect(bitmojiX+(height/150*133),bitmojiY+(height/150*325),(height/150*193),(height/150*46));
+fill(255, 255, 255);
+textSize((height/150*50));
+text('JM',bitmojiX+(height/150*165),bitmojiY+(height/150*320),(height/150*100),(height/150*100));
+//Shirt
+noStroke();
+};
+
+var jayden=function(bitmojiX,bitmojiY,height)
+{
+    drawBitmojiHead(bitmojiX,bitmojiY,height);
+    drawBitmojiBody(bitmojiX,bitmojiY,height);
+};
 
 //button
 var Button = function(config) {
@@ -71,9 +147,9 @@ var Button = function(config) {
 };
 
 Button.prototype.draw = function() {
-    fill(0, 234, 255);
+    fill(40, 56, 102);
     rect(this.x, this.y, this.width, this.height, 5);
-    fill(0, 0, 0);
+    fill(255, 255, 255);
     textSize(19);
     textAlign(LEFT, TOP);
     text(this.label, this.x+10, this.y+this.height/4);
@@ -92,19 +168,55 @@ Button.prototype.handleMouseClick = function() {
     }
 };
 
-var startButton = new Button({
+var singleP = new Button({
     x: 119,
-    y: 300,
-    label: "Start Game!",
+    y: 210,
+    label: "Single Player",
     onClick: function() {
         currentScene = 1;
     }
 });
 
+var multiP = new Button({
+    x: 119,
+    y: 275,
+    label: "Multiplayer",
+    onClick:function(){
+        currentScene=2;
+    }
+
+
+});
+
+var instructions=new Button({
+    x:119,
+    y:340,
+    label: "How to Play",
+    onClick: function(){
+        currentScene=3;
+    }
+});
+
+var back= new Button({
+    x:25,
+    y:340,
+    label:"Back",
+    onClick:function(){
+        currentScene=0;}
+});
+
+
+
+
 mouseClicked = function() {
     if (currentScene === 0)
     {
-        startButton.handleMouseClick();
+        singleP.handleMouseClick();
+        multiP.handleMouseClick();
+        instructions.handleMouseClick();
+    }
+    else if (currentScene===3){
+        back.handleMouseClick();
     }
 };
 
@@ -113,16 +225,35 @@ var splashScreen = function()
 {
     background(106, 138, 196);
     connor(78,-1,45);
+    jayden(170,-11,45);
     textSize(30);
-    text("Connect 4", 122,147);
+    text("Connect 4", 122,106);
     fill(255, 0, 0);
-    ellipse(139,255,50,50);
+    ellipse(139,175,50,50);
     fill(0, 13, 255);
-    ellipse(238,255,50,50);
-    startButton.draw();
+    ellipse(238,175,50,50);
+    singleP.draw();
+    multiP.draw();
+    instructions.draw();
+};
+
+var instructScreen= function(){
+    background(106, 138, 196);
+    fill(255, 255, 255);
+    textSize(40);
+    textAlign(CENTER);
+    text("How To Play", 130,25,150,150);
+    textSize(15);
+    text("The board of the game is 6 rows by 7 columns. Each player takes turns tapping the top of the columns. The game finished when one player creates 4 in a row with the turns they had (Diagnol, Horizontal, Vertical)",85,124,250,250);
+    back.draw();
+
+
 };
 
 //call to draw
 var draw = function() {
     if (currentScene === 0){splashScreen();}
+    else if(currentScene===3){instructScreen();}
+
 };
+ 

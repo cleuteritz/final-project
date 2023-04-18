@@ -1,0 +1,20 @@
+var boardGame = function(x,y,h){
+//Creating the Columns
+fill(125, 134, 184);
+//Column 1
+rect(0,50,50,349);
+//Column 2
+rect(51,50,50,349);
+//Column 3
+rect(101,50,50,349);
+//Column 4
+rect(151,50,50,349);
+//Column 5
+rect(202,50,50,349);
+//Column 6
+rect(253,50,50,349);
+//Column 7
+rect(304,50,50,349);
+};
+
+boardGame(50,50,50);

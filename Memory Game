@@ -74,7 +74,6 @@ var drawJayden=function(bitmojiX,bitmojiY,height)
     drawBitmojiBody(bitmojiX,bitmojiY,height);
 };
 
-
 var connor = function (x,y,h){
     //Hair
 noStroke();
@@ -362,6 +361,7 @@ var playGame= function(){
         textSize(15);
         text("Attempts: " + numTries, 292, 25);
         text("Timer: " + round((millis()-startTime)/1000)+ " seconds", 18,25);
+        if(numMatches === 6) {noLoop();}
     
 
 

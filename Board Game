@@ -1,20 +1,98 @@
-var boardGame = function(x,y,h){
-//Creating the Columns
-fill(125, 134, 184);
-//Column 1
-rect(0,50,50,349);
-//Column 2
-rect(51,50,50,349);
-//Column 3
-rect(101,50,50,349);
-//Column 4
-rect(151,50,50,349);
-//Column 5
-rect(202,50,50,349);
-//Column 6
-rect(253,50,50,349);
-//Column 7
-rect(304,50,50,349);
+var playerTurn = 0 ;
+var NUM_COLS = 6;
+var NUM_ROWS = 7;
+var SYMBOLS = ["X","O"];
+
+var tiles = [];
+
+var checkWin = function() {
+/*  0 3 6
+    1 4 7
+    2 5 8
+*/
+    if (tiles[0].label === tiles[1].label && tiles[0].label === tiles[2].label && !tiles[0].empty()){ return true;}
+    else if (tiles[3].label === tiles[4].label && tiles[3].label === tiles[5].label && !tiles[3].empty()){ return true;}
+    else if (tiles[6].label === tiles[7].label && tiles[6].label === tiles[8].label && !tiles[6].empty()){ return true;}
+    else if (tiles[0].label === tiles[3].label && tiles[0].label === tiles[6].label && !tiles[0].empty()){ return true;}
+    else if (tiles[1].label === tiles[4].label && tiles[1].label === tiles[7].label && !tiles[1].empty()){ return true;}
+    else if (tiles[2].label === tiles[5].label && tiles[2].label === tiles[8].label && !tiles[2].empty()){ return true;}
+    else if (tiles[0].label === tiles[4].label && tiles[0].label === tiles[8].label && !tiles[0].empty()){ return true;}
+    else if (tiles[6].label === tiles[4].label && tiles[6].label === tiles[2].label && !tiles[6].empty()){ return true;}
+    return false;
+    
 };
 
-boardGame(50,50,50);
+var Tile = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = width/NUM_COLS;
+    this.label = "";
+};
+
+Tile.prototype.draw = function() {
+    fill(229, 247, 69);
+    rect(1,2,398,397);
+    fill(214, 247, 202);
+    strokeWeight(2);
+    rect(this.x+5, this.y, this.size*0.8, this.size*0.8, 98);
+    textSize(100);
+    textAlign(CENTER, CENTER);
+    fill(0, 0, 0);
+    text(this.label, this.x+this.size/2, this.y+this.size/2);
+};
+
+Tile.prototype.empty = function() {
+    return this.label === "";
+};
+
+Tile.prototype.onClick = function() {
+    // If the tile is not empty, exit the function
+    if (!this.empty()){
+       return; 
+    }
+    // Put the player's symbol on the tile
+    this.label = SYMBOLS[playerTurn];
+    
+    playerTurn++;
+    if(playerTurn >= SYMBOLS.length){
+        playerTurn = 0;
+    }
+};
+    // Change the turn
+
+
+Tile.prototype.handleMouseClick = function(x, y) {
+    // Check for mouse clicks inside the tile
+    if ( x>= this.x && x <= this.x + this.size && y >= this.y && y <= this.y + this.size)
+    {
+        this.onClick();
+    }
+};
+
+for (var i = 0; i < NUM_COLS; i++) {
+    for (var j = 0; j < NUM_ROWS; j++) {
+        tiles.push(new Tile(i * (width/NUM_COLS-1), j * (height/NUM_ROWS-1)));
+    }
+}
+
+var drawTiles = function() {
+    for (var i in tiles) {
+        tiles[i].draw();
+    }
+};
+
+mouseReleased = function() {
+    for (var i in tiles) {
+        tiles[i].handleMouseClick(mouseX, mouseY);
+    }
+};
+
+draw = function() {
+    background(143, 143, 143);
+    drawTiles();
+    if (checkWin()){
+        fill(255, 0, 0);
+        text ("Winner!", 194,183);
+    }
+
+};

@@ -3,12 +3,16 @@ var NUM_COLS = 6;
 var NUM_ROWS = 7;
 var SYMBOLS = ["X","O"];
 
+
 var tiles = [];
 
 var checkWin = function() {
-/*  0 3 6
-    1 4 7
-    2 5 8
+/*  0  6  12 18 25 31 37
+    1  7  13 19 26 32 38
+    2  8  14 20 27 33 39
+    3  9  15 21 28 34 40
+    4  10 16 22 29 35 41
+    5  11 17 23 30 36 42
 */
     if (tiles[0].label === tiles[1].label && tiles[0].label === tiles[2].label && !tiles[0].empty()){ return true;}
     else if (tiles[3].label === tiles[4].label && tiles[3].label === tiles[5].label && !tiles[3].empty()){ return true;}
@@ -30,11 +34,9 @@ var Tile = function(x, y) {
 };
 
 Tile.prototype.draw = function() {
-    fill(229, 247, 69);
-    rect(1,2,398,397);
     fill(214, 247, 202);
     strokeWeight(2);
-    rect(this.x+5, this.y, this.size*0.8, this.size*0.8, 98);
+    rect(this.x+5, this.y, this.size*0.8, this.size*0.8, 132);
     textSize(100);
     textAlign(CENTER, CENTER);
     fill(0, 0, 0);
@@ -88,7 +90,7 @@ mouseReleased = function() {
 };
 
 draw = function() {
-    background(143, 143, 143);
+    background(255, 255, 0);
     drawTiles();
     if (checkWin()){
         fill(255, 0, 0);

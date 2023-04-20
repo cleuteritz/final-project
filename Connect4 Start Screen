@@ -1,6 +1,37 @@
 var currentScene = 0;
 
+var boardGame = function(x,y,h){
+strokeWeight(2);
+stroke(40, 56, 102);
+//Creating the Columns
+fill(250, 243, 27);
+//Column 1
+rect(0+x,50+y,45,349+h);
+//Column 2
+rect(50+x,50+y,45,349+h);
+//Column 3
+rect(100+x,50+y,45,349+h);
+//Column 4
+rect(150+x,50+y,45,349+h);
+//Column 5
+rect(200+x,50+y,45,349+h);
+//Column 6
+rect(250+x,50+y,45,349+h);
+//Column 7
+rect(300+x,50+y,45,349+h);
+for (var i=0; i<7;i++){
+    for(var j=0;j<6;j++){
+    fill(106, 138, 196);
+    ellipse((x+22)+i*50,(y+71)+j*50,25,25);
+    }
+}
+fill(0, 43, 255);
+rect(5,45,20,299);
+rect(370,45,20,299);
+rect(5,344,385,20);
 
+
+};
 
 
 
@@ -219,6 +250,9 @@ mouseClicked = function() {
     else if (currentScene===3){
         back.handleMouseClick();
     }
+    else if (currentScene===4){
+        back.handleMouseClick();
+    }
 };
 
 //intro
@@ -251,9 +285,37 @@ var instructScreen= function(){
 
 };
 
+var endScreen= function(){
+    background(106, 138, 196);
+    fill(237, 190, 3);
+    textSize(40);
+    textAlign(CENTER);
+    text("WINNER!", 115,79,175,160);
+    fill(255, 255, 255);
+    textSize(30);
+    text("Player",75,124,250,250);
+    image(getImage("space/star"),100,128,200,200);
+    back.draw();
+};
+
+var singlePGame=function(
+){
+background(106, 138, 196);
+boardGame(25,-5,-50);
+
+};
+
+var multiPGame=function(){
+background(106, 138, 196);
+boardGame(25,-5,-50);
+};
+
 //call to draw
 var draw = function() {
     if (currentScene === 0){splashScreen();}
+    else if(currentScene===1){singlePGame();}
+    else if(currentScene===2){multiPGame();}
     else if(currentScene===3){instructScreen();}
+    else if (currentScene===4){endScreen();}
 
 };

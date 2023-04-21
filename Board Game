@@ -1,6 +1,6 @@
 var playerTurn = 0 ;
-var NUM_COLS = 6;
-var NUM_ROWS = 7;
+var NUM_COLS = 7;
+var NUM_ROWS = 6;
 var SYMBOLS = ["X","O"];
 
 
@@ -36,9 +36,9 @@ var Tile = function(x, y) {
 Tile.prototype.draw = function() {
     fill(214, 247, 202);
     strokeWeight(2);
-    rect(this.x+5, this.y, this.size*0.8, this.size*0.8, 132);
-    textSize(100);
-    textAlign(CENTER, CENTER);
+    rect(this.x+5, this.y+20, this.size*0.8, this.size*0.8, 132);
+    textSize(39);
+    textAlign(CENTER,TOP);
     fill(0, 0, 0);
     text(this.label, this.x+this.size/2, this.y+this.size/2);
 };

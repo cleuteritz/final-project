@@ -1,28 +1,20 @@
-var playerTurn = 0 ;
+var playerTurn = 1 ;
 var NUM_COLS = 7;
 var NUM_ROWS = 6;
-var SYMBOLS = ["X","O"];
+var SYMBOLS = ["","red","blue"];
 
+var initialMatrix = [
+    [0, 0, 0, 0, 0, 0, 0], // row 0
+    [0, 0, 0, 0, 0, 0, 0], // row 1
+    [0, 0, 0, 0, 0, 0, 0], // row 2
+    [0, 0, 0, 0, 0, 0, 0], // row 3
+    [0, 0, 0, 0, 0, 0, 0], // row 4
+    [0, 0, 0, 0, 0, 0, 0]  // row 5
+    ];
 
 var tiles = [];
 
 var checkWin = function() {
-/*  0  6  12 18 25 31 37
-    1  7  13 19 26 32 38
-    2  8  14 20 27 33 39
-    3  9  15 21 28 34 40
-    4  10 16 22 29 35 41
-    5  11 17 23 30 36 42
-*/
-    if (tiles[0].label === tiles[1].label && tiles[0].label === tiles[2].label && !tiles[0].empty()){ return true;}
-    else if (tiles[3].label === tiles[4].label && tiles[3].label === tiles[5].label && !tiles[3].empty()){ return true;}
-    else if (tiles[6].label === tiles[7].label && tiles[6].label === tiles[8].label && !tiles[6].empty()){ return true;}
-    else if (tiles[0].label === tiles[3].label && tiles[0].label === tiles[6].label && !tiles[0].empty()){ return true;}
-    else if (tiles[1].label === tiles[4].label && tiles[1].label === tiles[7].label && !tiles[1].empty()){ return true;}
-    else if (tiles[2].label === tiles[5].label && tiles[2].label === tiles[8].label && !tiles[2].empty()){ return true;}
-    else if (tiles[0].label === tiles[4].label && tiles[0].label === tiles[8].label && !tiles[0].empty()){ return true;}
-    else if (tiles[6].label === tiles[4].label && tiles[6].label === tiles[2].label && !tiles[6].empty()){ return true;}
-    return false;
     
 };
 
@@ -31,10 +23,11 @@ var Tile = function(x, y) {
     this.y = y;
     this.size = width/NUM_COLS;
     this.label = "";
+    this.color1 = color(214, 247, 202);
 };
 
 Tile.prototype.draw = function() {
-    fill(214, 247, 202);
+    fill(this.color1);
     strokeWeight(2);
     rect(this.x+5, this.y+20, this.size*0.8, this.size*0.8, 132);
     textSize(39);
@@ -53,11 +46,15 @@ Tile.prototype.onClick = function() {
        return; 
     }
     // Put the player's symbol on the tile
-    this.label = SYMBOLS[playerTurn];
+    this.label = rect(this.x,this.y,this.size*0.8,this.size*0.8,132);
     
-    playerTurn++;
-    if(playerTurn >= SYMBOLS.length){
-        playerTurn = 0;
+    if(playerTurn === 1){
+        playerTurn = 2;
+        this.color1 = color(255, 0, 0);
+    }
+    else if (playerTurn === 2){
+        playerTurn = 1;
+        this.color1 = color(0, 0, 255);
     }
 };
     // Change the turn

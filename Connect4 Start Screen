@@ -1,4 +1,5 @@
 var currentScene = 0;
+var playerTurn=0;
 
 var boardGame = function(x,y,h){
 strokeWeight(2);
@@ -200,19 +201,12 @@ Button.prototype.handleMouseClick = function() {
     }
 };
 
-var singleP = new Button({
-    x: 119,
-    y: 210,
-    label: "Single Player",
-    onClick: function() {
-        currentScene = 1;
-    }
-});
 
-var multiP = new Button({
+
+var play = new Button({
     x: 119,
     y: 275,
-    label: "Multiplayer",
+    label: "Play",
     onClick:function(){
         currentScene=2;
     }
@@ -243,8 +237,8 @@ var back= new Button({
 mouseClicked = function() {
     if (currentScene === 0)
     {
-        singleP.handleMouseClick();
-        multiP.handleMouseClick();
+
+        play.handleMouseClick();
         instructions.handleMouseClick();
     }
     else if (currentScene===3){
@@ -267,8 +261,7 @@ var splashScreen = function()
     ellipse(139,175,50,50);
     fill(0, 13, 255);
     ellipse(238,175,50,50);
-    singleP.draw();
-    multiP.draw();
+    play.draw();
     instructions.draw();
 };
 
@@ -298,14 +291,10 @@ var endScreen= function(){
     back.draw();
 };
 
-var singlePGame=function(
-){
-background(106, 138, 196);
-boardGame(25,-5,-50);
 
-};
 
-var multiPGame=function(){
+
+var PGame=function(){
 background(106, 138, 196);
 boardGame(25,-5,-50);
 };
@@ -313,8 +302,7 @@ boardGame(25,-5,-50);
 //call to draw
 var draw = function() {
     if (currentScene === 0){splashScreen();}
-    else if(currentScene===1){singlePGame();}
-    else if(currentScene===2){multiPGame();}
+    else if(currentScene===2){PGame();}
     else if(currentScene===3){instructScreen();}
     else if (currentScene===4){endScreen();}
 

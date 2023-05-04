@@ -1,64 +1,10 @@
-var playerTurn = 1 ;
+var playerTurn = 1;
 var NUM_COLS = 7;
 var NUM_ROWS = 6;
-var SYMBOLS = ["","red","blue"];
-
-/*var initialMatrix = [
-    [0, 0, 0, 0, 0, 0, 0], // row 0
-    [0, 0, 0, 0, 0, 0, 0], // row 1
-    [0, 0, 0, 0, 0, 0, 0], // row 2
-    [0, 0, 0, 0, 0, 0, 0], // row 3
-    [0, 0, 0, 0, 0, 0, 0], // row 4
-    [0, 0, 0, 0, 0, 0, 0]  // row 5
-    ];*/
+var SYMBOLS = ["", "red", "blue"];
 
 var tiles = [[],[],[],[],[],[],[]];
-
-var checkWins = function() {
-    
-    //search for non-empty slot
-    
-    
-    //right
-    
-    
-    //down
-    
-    
-    //down right
-    
-    //down left
-    
-    
-    
-    
-};
-
-var checkPiece = function()
-{
-    //search through array for first piece it sees
-    
-
-    
-};
-
-
-var checkWin = function()
-{
- //Right
- for (var i = checkPiece; i < checkPiece+3; i++)
-    {
-        if (checkPiece !== checkPiece +1)
-        {return;}
-        
-    }
-    
-    
-};
-
-
-
-
+var pieceCounts = [0, 0, 0, 0, 0, 0, 0]; // keeps track of the number of pieces in each column
 
 var Tile = function(x, y, a, b) {
     this.x = x;
@@ -73,11 +19,7 @@ var Tile = function(x, y, a, b) {
 Tile.prototype.draw = function() {
     fill(this.color1);
     strokeWeight(2);
-    rect(this.x+8, this.y+8, this.size*0.8, this.size*0.8, 132);
-    textSize(39);
-    textAlign(CENTER,TOP);
-    fill(0, 0, 0);
-    text(this.label, this.x+this.size/2, this.y+this.size/2);
+    ellipse(this.x + this.size/2, this.y + this.size/2, this.size*0.8, this.size*0.8);
 };
 
 Tile.prototype.empty = function() {
@@ -89,46 +31,43 @@ Tile.prototype.onClick = function() {
     if (!this.empty()){
        return; 
     }
-};
-    for(var i = 5 ; i <= 0; i--)
-    { 
-        if(tiles[this.column][i].color1 === color(214, 247, 202)) 
-        {
-            if(playerTurn === 1){
-            playerTurn = 2;
-            tiles[this.column][i].color1 = color(255, 0, 0);
-        }
-        else if (playerTurn === 2)
-        {
-        playerTurn = 1;
-        tiles[this.column][i].color1 = color(0, 0, 255);
-        }
-    }
     
-    //player Turn + Color Change
-    if(playerTurn === 1){
-        playerTurn = 2;
-        this.color1 = color(255, 0, 0);
+    // Place the piece
+    for(var i = NUM_ROWS-1; i >= 0; i--) { 
+        if(tiles[this.column][i].color1 === color(214, 247, 202)) {
+            if(playerTurn === 1){
+                playerTurn = 2;
+                tiles[this.column][i].color1 = color(255, 0, 0);
+                break;
+            }
+            else if (playerTurn === 2) {
+                playerTurn = 1;
+                tiles[this.column][i].color1 = color(0, 0, 255);
+                break;
+            }
+        }
     }
-    else if (playerTurn === 2){
-        playerTurn = 1;
-        this.color1 = color(0, 0, 255);
-    }
-}
+};
+
+
+
+
 
 
 
 Tile.prototype.handleMouseClick = function(x, y) {
     // Check for mouse clicks inside the tile
-    if ( x>= this.x && x <= this.x + this.size && y >= this.y && y <= this.y + this.size)
-    {
+    if (x >= this.x && x <= this.x + this.size && y >= this.y && y <= this.y + this.size){
         this.onClick();
     }
 };
 
+// Create the tiles
 for (var i = 0; i < NUM_COLS; i++) {
     for (var j = 0; j < NUM_ROWS; j++) {
-        tiles[i].push(new Tile(i * (width/NUM_COLS-1), j * (height/NUM_ROWS-1),i,j));
+        var x = i * (width/NUM_COLS-1);
+        var y = j * (height/NUM_ROWS-1);
+        tiles[i].push(new Tile(x, y, i, j));
     }
 }
 
@@ -146,14 +85,10 @@ mouseReleased = function() {
             tiles[i][j].handleMouseClick(mouseX, mouseY);
         }
     }
+    redraw();
 };
 
 draw = function() {
     background(255, 255, 0);
     drawTiles();
-    if (checkWin()){
-        fill(255, 0, 0);
-        text ("Winner!", 194,183);
-    }
-
 };

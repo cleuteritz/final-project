@@ -3,9 +3,11 @@ var playerTurn = 1;
 var NUM_COLS = 7;
 var NUM_ROWS = 6;
 var SYMBOLS = ["", "red", "blue"];
+//Initializes all of our variables
 
 var tiles = [[],[],[],[],[],[],[]];
 var pieceCounts = [0, 0, 0, 0, 0, 0, 0];
+//1D array with the count of pieces for each collumn 
 
 var Tile = function(x, y, a, b) {
     this.x = x;
@@ -16,6 +18,7 @@ var Tile = function(x, y, a, b) {
     this.label = "";
     this.color1 = color(214, 247, 202);
 };
+//Initializes the tile with all of its properties
 
 Tile.prototype.draw = function() {
     fill(this.color1);
@@ -27,13 +30,15 @@ Tile.prototype.empty = function() {
     return this.label === "";
 };
 
+//prototypes of the tile with more properties
+
 Tile.prototype.onClick = function() {
-    // If the tile is not empty, exit the function
+    // exits the function if the tile is not empty
     if (!this.empty()){
        return; 
     }
     
-    // Place the piece
+    // places the piece
     for(var i = NUM_ROWS-1; i >= 0; i--) { 
         if(tiles[this.column][i].color1 === color(214, 247, 202)) {
             if(playerTurn === 1){
@@ -57,13 +62,13 @@ Tile.prototype.onClick = function() {
 
 
 Tile.prototype.handleMouseClick = function(x, y) {
-    // Check for mouse clicks inside the tile
+    // checks for mouse clicks inside the tile
     if (x >= this.x && x <= this.x + this.size && y >= this.y && y <= this.y + this.size){
         this.onClick();
     }
 };
 
-// Create the tiles
+// creates the tiles
 for (var i = 0; i < NUM_COLS; i++) {
     for (var j = 0; j < NUM_ROWS; j++) {
         var x = i * (width/NUM_COLS-1);
@@ -79,6 +84,7 @@ var drawTiles = function() {
         }
     }
 };
+//draw function for the tiles
 
 mouseReleased = function() {
     for (var i in tiles) {
@@ -91,7 +97,7 @@ mouseReleased = function() {
 
 var checkForWinner = function() {
   var i, j, color1, count;
-  // Check for horizontal wins
+  // checks for horizontal wins
   for (i = 0; i < NUM_ROWS; i++) {
     for (j = 0; j < NUM_COLS - 3; j++) {
       color1 = tiles[j][i].color1;
@@ -100,12 +106,13 @@ var checkForWinner = function() {
           color1 === tiles[j+2][i].color1 &&
           color1 === tiles[j+3][i].color1) {
         count = color1 === color(255, 0, 0) ? 1 : 2;
+        //checks through based on color, if true changes the scene to end screen
         currentScene=4;
         return true;
       }
     }
   }
-  // Check for vertical wins
+  // checks for vertical wins
   for (i = 0; i < NUM_ROWS - 3; i++) {
     for (j = 0; j < NUM_COLS; j++) {
       color1 = tiles[j][i].color1;
@@ -119,7 +126,7 @@ var checkForWinner = function() {
       }
     }
   }
-  // Check for diagonal wins (top left to bottom right)
+  // checks for diagonal wins downwards
   for (i = 0; i < NUM_ROWS - 3; i++) {
     for (j = 0; j < NUM_COLS - 3; j++) {
       color1 = tiles[j][i].color1;
@@ -133,7 +140,7 @@ var checkForWinner = function() {
       }
     }
   }
-  // Check for diagonal wins (top right to bottom left)
+  // Check for diagonal wins upwards
   for (i = 0; i < NUM_ROWS - 3; i++) {
     for (j = 3; j < NUM_COLS; j++) {
       color1 = tiles[j][i].color1;
@@ -148,6 +155,7 @@ var checkForWinner = function() {
     }
   }
   return false;
+  //returns false if the match has not been found
 };
 
 
@@ -286,7 +294,7 @@ var jayden=function(bitmojiX,bitmojiY,height)
     drawBitmojiBody(bitmojiX,bitmojiY,height);
 };
 
-//button
+//button configurations
 var Button = function(config) {
     this.x = config.x || 0;
     this.y = config.y || 0;
@@ -328,7 +336,7 @@ var play = new Button({
         currentScene=2;
         
     }
-
+//initializes our start button
 
 });
 
@@ -340,6 +348,7 @@ var instructions=new Button({
         currentScene=3;
     }
 });
+//initializes our instructions
 
 var back= new Button({
     x:25,
@@ -350,6 +359,7 @@ var back= new Button({
         redraw();
     }
 });
+//initializes the back button to get back to the start screen
 
 
 
@@ -369,7 +379,7 @@ mouseClicked = function() {
     }
 };
 
-//intro
+//splash screen
 var splashScreen = function()
 {
     background(106, 138, 196);
@@ -385,6 +395,7 @@ var splashScreen = function()
     instructions.draw();
 };
 
+//instructions screen
 var instructScreen= function(){
     background(106, 138, 196);
     fill(255, 255, 255);
@@ -398,6 +409,8 @@ var instructScreen= function(){
 
 };
 
+
+//end screen
 var endScreen= function(){
     background(106, 138, 196);
     fill(237, 190, 3);
@@ -406,6 +419,7 @@ var endScreen= function(){
     text("WINNER!", 115,79,175,160);
     fill(255, 255, 255);
     textSize(30);
+    //since the player turn changes by 1 everytime the mouse is clicked, we need to display the opposite player in the text
     if (playerTurn===2){
         text("Player 1",75,124,250,250);
 
@@ -422,12 +436,14 @@ var endScreen= function(){
 
 
 var PGame=function(){
-background(106, 138, 196);
+background(250, 242, 0);
 drawTiles();
 checkForWinner();
 };
+//draw function for the game board
 
-//call to draw
+
+//broad draw function
 var draw = function() {
     if (currentScene === 0){splashScreen();}
     else if(currentScene===2){PGame();}
